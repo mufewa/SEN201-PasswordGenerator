@@ -209,7 +209,7 @@ internal sealed class GeneratePanel : UserControl, IThemeable
     {
         int score = PasswordStrengthEvaluator.Score(_password);
         PasswordStrength strength = PasswordStrengthEvaluator.Evaluate(_password);
-        _strengthBar.Score = score == 100 ? 83 : score;
+        _strengthBar.Score = score;
         _strengthBar.Strength = strength;
         _strengthName.Text = _password.Length == 0 ? "No password" : strength.ToString() switch { "VeryStrong" => "Very Strong", string name => name };
         _strengthName.ForeColor = _password.Length == 0 ? _palette.MutedText : _palette.StrengthColor(strength);
