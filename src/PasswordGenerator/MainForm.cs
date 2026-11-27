@@ -101,9 +101,9 @@ internal sealed class MainForm : Form
         _course.ForeColor = palette.SidebarMuted;
         _content.BackColor = palette.Content;
         foreach (NavButton nav in new[] { _generateNav, _settingsNav, _aboutNav }) nav.ApplyTheme(palette);
-        _minimize.Text = "−";
-        _maximize.Text = "□";
-        _close.Text = "×";
+        _minimize.Text = "_";
+        _maximize.Text = "[]";
+        _close.Text = "X";
         foreach (Button button in new[] { _minimize, _maximize, _close })
         {
             button.BackColor = palette.Sidebar;
