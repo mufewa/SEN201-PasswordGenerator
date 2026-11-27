@@ -41,19 +41,19 @@ public sealed class SliderControl : Control, IThemeable
 
     private void SetFromX(int x)
     {
-        var fraction = Math.Clamp((x - 9f) / Math.Max(1, Width - 18), 0, 1);
+        var fraction = Math.Clamp((x - 12f) / Math.Max(1, Width - 24), 0, 1);
         Value = Minimum + (int)Math.Round(fraction * (Maximum - Minimum));
     }
 
     protected override void OnPaint(PaintEventArgs e)
     {
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-        var x = 9 + (Width - 18) * (_value - Minimum) / (float)(Maximum - Minimum);
-        using var track = new Pen(_palette.PasswordBox, 5) { StartCap = LineCap.Round, EndCap = LineCap.Round };
-        using var fill = new Pen(_palette.PrimaryButton, 5) { StartCap = LineCap.Round, EndCap = LineCap.Round };
+        var x = 12 + (Width - 24) * (_value - Minimum) / (float)(Maximum - Minimum);
+        using var track = new Pen(_palette.PasswordBox, 7) { StartCap = LineCap.Round, EndCap = LineCap.Round };
+        using var fill = new Pen(_palette.PrimaryButton, 7) { StartCap = LineCap.Round, EndCap = LineCap.Round };
         using var thumb = new SolidBrush(_palette.PrimaryButton);
-        e.Graphics.DrawLine(track, 9, Height / 2, Width - 9, Height / 2);
-        e.Graphics.DrawLine(fill, 9, Height / 2, x, Height / 2);
-        e.Graphics.FillEllipse(thumb, x - 9, Height / 2f - 9, 18, 18);
+        e.Graphics.DrawLine(track, 12, Height / 2, Width - 12, Height / 2);
+        e.Graphics.DrawLine(fill, 12, Height / 2, x, Height / 2);
+        e.Graphics.FillEllipse(thumb, x - 12, Height / 2f - 12, 24, 24);
     }
 }

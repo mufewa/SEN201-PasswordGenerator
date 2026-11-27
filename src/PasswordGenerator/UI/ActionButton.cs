@@ -9,6 +9,7 @@ public sealed class ActionButton : Button, IThemeable
 
     public ActionButton()
     {
+        SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
         FlatStyle = FlatStyle.Flat;
         FlatAppearance.BorderSize = 0;
         DoubleBuffered = true;
@@ -32,6 +33,7 @@ public sealed class ActionButton : Button, IThemeable
 
     protected override void OnPaint(PaintEventArgs e)
     {
+        e.Graphics.Clear(_palette.Content);
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         var fill = IsPrimary ? (_hover ? _palette.PrimaryButtonHover : _palette.PrimaryButton) : (_hover ? _palette.SecondaryButtonHover : _palette.SecondaryButton);
         var color = IsPrimary ? _palette.PrimaryButtonText : _palette.SecondaryButtonText;
@@ -39,16 +41,17 @@ public sealed class ActionButton : Button, IThemeable
         var bounds = new RectangleF(0.5f, 0.5f, Width - 1.5f, Height - 1.5f);
         using var brush = new SolidBrush(fill);
         using var border = new Pen(IsPrimary ? fill : _palette.InputBorder);
-        e.Graphics.FillRoundedRectangle(brush, bounds, 9);
-        e.Graphics.DrawRoundedRectangle(border, bounds, 9);
+        e.Graphics.FillRoundedRectangle(brush, bounds, 12);
+        e.Graphics.DrawRoundedRectangle(border, bounds, 12);
         var textBounds = new Rectangle(0, 0, Width, Height);
         if (IconKind is { } icon)
         {
             var textWidth = TextRenderer.MeasureText(Text, Font).Width;
-            var start = Math.Max(10, (Width - textWidth - 27) / 2);
-            Icons.Draw(e.Graphics, icon, new Rectangle(start, (Height - 20) / 2, 20, 20), color);
-            textBounds = new Rectangle(start + 26, 0, Width - start - 29, Height);
+            var iconSize = Text.Length == 0 ? 24 : 27;
+            var start = Text.Length == 0 ? (Width - iconSize) / 2 : Math.Max(10, (Width - textWidth - iconSize - 12) / 2);
+            Icons.Draw(e.Graphics, icon, new Rectangle(start, (Height - iconSize) / 2, iconSize, iconSize), color);
+            textBounds = new Rectangle(start + iconSize + 12, 0, Width - start - iconSize - 12, Height);
         }
-        TextRenderer.DrawText(e.Graphics, Text, Font, textBounds, color, TextFormatFlags.VerticalCenter | (IconKind is null ? TextFormatFlags.HorizontalCenter : TextFormatFlags.Left) | TextFormatFlags.EndEllipsis);
+        if (Text.Length > 0) TextRenderer.DrawText(e.Graphics, Text, Font, textBounds, color, TextFormatFlags.VerticalCenter | (IconKind is null ? TextFormatFlags.HorizontalCenter : TextFormatFlags.Left) | TextFormatFlags.EndEllipsis);
     }
 }
