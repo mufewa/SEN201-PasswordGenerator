@@ -167,7 +167,7 @@ internal sealed class GeneratePanel : UserControl, IThemeable
             IncludeUppercase = _uppercase.Checked,
             IncludeLowercase = _lowercase.Checked,
             IncludeNumbers = _numbers.Checked,
-            IncludeSpecial = _special.Checked
+            IncludeSpecialChars = _special.Checked
         };
         if (!options.HasAnyCharacterSet)
         {
