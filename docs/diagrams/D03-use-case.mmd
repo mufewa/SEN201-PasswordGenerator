@@ -1,0 +1,27 @@
+%% D03 - Use cases. The user controls generation, display, preferences, and navigation.
+flowchart LR
+    U["User"]
+    subgraph S["Password Generator"]
+      G(["Generate password"])
+      L(["Set length"])
+      C(["Select character types"])
+      H(["Show or hide password"])
+      CP(["Copy password"])
+      CL(["Clear password"])
+      TH(["Switch theme"])
+      N(["Navigate pages"])
+      A(["View About"])
+      RP(["Reset preferences"])
+    end
+    U --> G
+    U --> L
+    U --> C
+    U --> H
+    U --> CP
+    U --> CL
+    U --> TH
+    U --> N
+    U --> A
+    U --> RP
+    L --> G
+    C --> G

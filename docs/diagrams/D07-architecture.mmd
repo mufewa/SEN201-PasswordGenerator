@@ -1,0 +1,30 @@
+%% D07 - Three-layer architecture. Presentation calls domain services and persists user preferences locally.
+flowchart TB
+    subgraph P["Presentation"]
+      Main["MainForm"]
+      Gen["GeneratePanel"]
+      Set["SettingsPanel"]
+      About["AboutPanel"]
+      Main --> Gen
+      Main --> Set
+      Main --> About
+    end
+    subgraph B["Business logic"]
+      Opt["PasswordOptions"]
+      Svc["PasswordGeneratorService"]
+      Eval["PasswordStrengthEvaluator"]
+      Opt --> Svc
+      Svc --> Eval
+    end
+    subgraph D["Local data"]
+      Store["PreferencesStore"]
+      Pref["UserPreferences"]
+      Json["preferences.json<br/>LocalApplicationData/SEN201PasswordGenerator"]
+      Store --> Pref
+      Store --> Json
+    end
+    Gen --> Opt
+    Gen --> Svc
+    Gen --> Eval
+    Main --> Store
+    Set --> Store

@@ -1,0 +1,57 @@
+%% D04 - Class diagram. Core domain, generation, evaluation, and persistence classes.
+classDiagram
+    class PasswordOptions {
+      +int Length
+      +bool IncludeUppercase
+      +bool IncludeLowercase
+      +bool IncludeNumbers
+      +bool IncludeSpecialChars
+      +bool HasAnyCharacterSet
+      +GetSelectedSets() string[]
+    }
+    class IPasswordGenerator {
+      <<interface>>
+      +GeneratePassword(PasswordOptions) string
+    }
+    class PasswordGeneratorService {
+      +GeneratePassword(PasswordOptions) string
+    }
+    class CharacterSets {
+      <<static>>
+      +string Uppercase
+      +string Lowercase
+      +string Digits
+      +string Special
+    }
+    class PasswordStrength {
+      <<enumeration>>
+      Weak
+      Fair
+      Strong
+      VeryStrong
+    }
+    class PasswordStrengthEvaluator {
+      <<static>>
+      +GetScore(string) int
+      +Evaluate(string) PasswordStrength
+      +GetDescription(PasswordStrength) string
+    }
+    class UserPreferences {
+      +int Length
+      +bool IncludeUppercase
+      +bool IncludeLowercase
+      +bool IncludeNumbers
+      +bool IncludeSpecialChars
+      +AppTheme Theme
+      +bool HideByDefault
+      +bool RememberPreferences
+    }
+    class PreferencesStore {
+      +Load() UserPreferences
+      +Save(UserPreferences)
+    }
+    IPasswordGenerator <|.. PasswordGeneratorService
+    PasswordGeneratorService --> PasswordOptions
+    PasswordOptions --> CharacterSets
+    PasswordStrengthEvaluator --> PasswordStrength
+    PreferencesStore --> UserPreferences

@@ -1,0 +1,11 @@
+%% D10 - Password algorithm. Cryptographic picks guarantee each selected set, then a cryptographic Fisher-Yates shuffle removes fixed positions.
+flowchart TD
+    A(["GeneratePassword(options)"]) --> V{"Options valid,<br/>length 4-64,<br/>any set?"}
+    V -- No --> X["Throw argument exception"]
+    V -- Yes --> S["Build selected sets and combined pool"]
+    S --> G["For each selected set:<br/>pick one character with RandomNumberGenerator.GetInt32"]
+    G --> F{"Output length reached?"}
+    F -- No --> R["Pick from combined pool with RandomNumberGenerator.GetInt32"]
+    R --> F
+    F -- Yes --> Sh["Fisher-Yates shuffle:<br/>for i from n-1 down to 1, choose j in 0..i<br/>using RandomNumberGenerator.GetInt32"]
+    Sh --> O["Return shuffled string"]

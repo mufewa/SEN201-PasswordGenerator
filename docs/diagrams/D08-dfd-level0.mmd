@@ -1,0 +1,6 @@
+%% D08 - Context data flow. The user supplies options and receives a password while the system reads and writes preferences.
+flowchart LR
+    U["User"] -->|"Length, categories, settings, actions"| S(("Password Generator System"))
+    S -->|"Password, strength, status"| U
+    S -->|"Saved preferences"| D[("Preference store")]
+    D -->|"Stored preferences"| S

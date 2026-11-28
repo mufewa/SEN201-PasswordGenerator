@@ -1,0 +1,12 @@
+%% D09 - Level-one data flow. Generation, evaluation, display, copy, and preference saving are separate processes.
+flowchart LR
+    U["User"] -->|"Length and categories"| C(("1 Configure"))
+    C -->|"Validated options"| G(("2 Generate"))
+    G -->|"Password"| E(("3 Evaluate"))
+    E -->|"Password and score"| V(("4 Display"))
+    V -->|"Password and feedback"| U
+    V -->|"Selected password"| CP(("5 Copy"))
+    CP -->|"Clipboard result"| U
+    U -->|"Theme and defaults"| SV(("6 Save preferences"))
+    SV --> D[("Preferences")]
+    D -->|"Saved defaults"| C

@@ -1,0 +1,11 @@
+%% D12 - Testing life cycle. A defect is recorded, fixed, retested, and covered by regression before closure.
+flowchart LR
+    P["Plan tests"] --> D["Design cases"]
+    D --> E["Prepare environment"]
+    E --> X["Execute"]
+    X --> Q{"Defect?"}
+    Q -- Yes --> L["Log defect"]
+    L --> F["Fix and retest"]
+    F --> R["Regression"]
+    R --> X
+    Q -- No --> C["Close with evidence"]

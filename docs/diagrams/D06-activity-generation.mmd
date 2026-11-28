@@ -1,0 +1,17 @@
+%% D06 - Generation activity. Invalid selections stop generation; valid results can be viewed, copied, or cleared.
+flowchart TD
+    Start(["Launch app"]) --> Configure["Set length and character types"]
+    Configure --> Generate["Click Generate"]
+    Generate --> Any{"Any category selected?"}
+    Any -- No --> Error["Show validation error"]
+    Error --> Configure
+    Any -- Yes --> Make["Generate and shuffle password"]
+    Make --> Score["Evaluate strength"]
+    Score --> Display["Display password and feedback"]
+    Display --> Action{"Next action"}
+    Action -- "Reveal or hide" --> Toggle["Toggle visibility"]
+    Toggle --> Action
+    Action -- Copy --> Copy["Copy to clipboard"]
+    Copy --> Action
+    Action -- Clear --> Clear["Clear password and feedback"]
+    Clear --> Configure

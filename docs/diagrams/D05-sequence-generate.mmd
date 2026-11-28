@@ -1,0 +1,17 @@
+%% D05 - Generate sequence. The panel validates options, generates a password, evaluates it, and updates the view.
+sequenceDiagram
+    actor User
+    participant Panel as GeneratePanel
+    participant Options as PasswordOptions
+    participant Generator as PasswordGeneratorService
+    participant Strength as PasswordStrengthEvaluator
+    User->>Panel: Click Generate
+    Panel->>Options: Set length and selected categories
+    Panel->>Generator: GeneratePassword(options)
+    Generator->>Options: GetSelectedSets()
+    Options-->>Generator: Selected character sets
+    Generator->>Generator: Pick one from each, fill, shuffle
+    Generator-->>Panel: Password
+    Panel->>Strength: GetScore(password), Evaluate(password)
+    Strength-->>Panel: Score and strength
+    Panel-->>User: Display password and feedback

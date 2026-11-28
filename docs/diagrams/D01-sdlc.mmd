@@ -1,0 +1,9 @@
+%% D01 - Software development life cycle. The team used incremental delivery with feedback after each tested increment.
+flowchart LR
+    R["Requirements"] --> D["Design"]
+    D --> I["Implementation"]
+    I --> T["Testing"]
+    T --> P["Deployment"]
+    P --> M["Maintenance"]
+    T -->|"Defects and feedback"| D
+    M -->|"Next increment"| R

@@ -1,0 +1,18 @@
+%% D11 - Branching history. PR 1 merged into develop on 28 November; the remaining branches await review.
+gitGraph
+    commit id: "515c188 initial"
+    branch develop
+    checkout develop
+    commit id: "86c89dd solution"
+    branch core_logic
+    checkout core_logic
+    commit id: "c254561 generator"
+    commit id: "1401720 UI"
+    commit id: "9f3de9c symbols"
+    checkout develop
+    merge core_logic id: "63494ff PR 1"
+    branch ui_panels
+    checkout develop
+    branch testing_docs
+    checkout develop
+    branch report_docs

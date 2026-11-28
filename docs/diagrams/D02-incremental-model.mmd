@@ -1,0 +1,9 @@
+%% D02 - Incremental model. Four short increments combined the core, interface, preferences, and verification work.
+flowchart LR
+    I1["Increment 1: Core logic<br/>26 Nov 2026"] --> I2["Increment 2: Main and Generate UI<br/>27 Nov 2026"]
+    I2 --> I3["Increment 3: Settings, About, preferences<br/>27-28 Nov 2026"]
+    I3 --> I4["Increment 4: Tests, integration, docs<br/>28 Nov 2026"]
+    I1 --> T1["Build and unit checks"]
+    I2 --> T2["UI smoke checks"]
+    I3 --> T3["Persistence checks"]
+    I4 --> T4["Regression and report"]
